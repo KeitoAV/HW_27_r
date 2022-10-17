@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "hw-27-r"
+version = "0.1.0"
+description = ""
+authors = ["KeitoAV <keito_ekka@mail.ru>"]
+readme = "README.md"
+packages = [{include = "hw_27_r"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.1.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
