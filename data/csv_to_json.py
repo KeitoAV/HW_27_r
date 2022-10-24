@@ -1,8 +1,10 @@
 import csv
 import json
 
-ADS = 'ads'
-CATEGORY = 'categories'
+AD = 'ad'
+CATEGORY = 'category'
+LOCATION = 'location'
+USER = 'user'
 
 
 def convert_file(csv_file, json_file, model):
@@ -14,6 +16,10 @@ def convert_file(csv_file, json_file, model):
                 del row['id']
             else:
                 del row['Id']
+
+            if 'location_id' in row:
+                row['location'] = [int(row['location_id'])]
+                del row['location_id']
 
             if 'is_published' in row:
                 if row['is_published'] == 'TRUE':
@@ -30,5 +36,7 @@ def convert_file(csv_file, json_file, model):
         json_f.write(json.dumps(result, ensure_ascii=False))
 
 
-convert_file(f"{ADS}.csv", f"{ADS}.json", 'ads.ad')
+convert_file(f"{AD}.csv", f"{AD}.json", 'ads.ad')
 convert_file(f"{CATEGORY}.csv", f"{CATEGORY}.json", 'ads.category')
+convert_file(f"{LOCATION}.csv", f"{LOCATION}.json", 'users.location')
+convert_file(f"{USER}.csv", f"{USER}.json", 'users.user')
