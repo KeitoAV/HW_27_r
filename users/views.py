@@ -1,11 +1,9 @@
 import json
 
-from django.contrib import postgres
+from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
-from django.db.models import Count
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.utils.baseconv import base64
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
@@ -132,14 +130,9 @@ class UserCreateView(CreateView):
             first_name=data['first_name'],
             last_name=data['last_name'],
             role=data['role'],
-            password=data['password'],
+            password=make_password(data['password']),  # hash password
             age=data['age']
         )
-
-        # if 'password' in data:
-        #     for password in data['password']:
-        #         user.set_password(password)
-        #         user.save()
 
         if 'locations' in data:
             for loc_name in data['locations']:
