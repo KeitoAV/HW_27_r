@@ -1,9 +1,11 @@
 import json
 
+from django.contrib import postgres
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.utils.baseconv import base64
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView
@@ -133,6 +135,11 @@ class UserCreateView(CreateView):
             password=data['password'],
             age=data['age']
         )
+
+        # if 'password' in data:
+        #     for password in data['password']:
+        #         user.set_password(password)
+        #         user.save()
 
         if 'locations' in data:
             for loc_name in data['locations']:
